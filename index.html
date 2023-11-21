@@ -48,6 +48,17 @@
         nav a:hover {
             color: #1f1ef7;
         }
+
+        #muteButton {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: black;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -63,7 +74,30 @@
         <a href="https://spoti.fi/3NO5Die" target="_blank">Music</a>
     </nav>
 
+    <audio id="backgroundMusic" autoplay loop>
+        <source src="cancun-sega.mp3" type="audio/mp3">
+        <!-- Provide alternative audio sources for different browsers if needed -->
+        Your browser does not support the audio element.
+    </audio>
+
+    <button id="muteButton">Mute</button>
+
     <script>
+         document.addEventListener('DOMContentLoaded', function () {
+        var audio = document.getElementById('backgroundMusic');
+
+        // Play audio
+        audio.play();
+
+        // Mute/unmute button functionality
+        document.getElementById('muteButton').addEventListener('click', function () {
+            audio.muted = !audio.muted;
+
+            // Update button text
+            document.getElementById('muteButton').innerText = audio.muted ? 'Unmute' : 'Mute';
+        });
+
+        // Favicon update on tab visibility change
         document.addEventListener('visibilitychange', function () {
             if (document.hidden) {
                 // Tab is hidden
@@ -73,6 +107,8 @@
                 document.getElementById('favicon').href = 'https://cdn.discordapp.com/attachments/1167493869076754623/1175730719595692122/chrome_hearts.jpeg';
             }
         });
+    });
+</script>
     </script>
 </body>
 
