@@ -30,6 +30,7 @@
             max-width: 410px;
             display: block;
             margin: 0 auto;
+            cursor: pointer;
         }
 
         nav {
@@ -48,7 +49,7 @@
         }
 
         nav a:hover {
-            color: #1f1ef7;
+            color: rgb(16, 20, 230)
         }
 
         #entryButton {
@@ -80,7 +81,7 @@
 
     <div id="content">
         <header>
-            <img src="https://media.tenor.com/QGvhb6Jj-g8AAAAC/sonic-lowpoly.gif" alt="GIF" />
+            <img id="gif" src="https://media.tenor.com/QGvhb6Jj-g8AAAAC/sonic-lowpoly.gif" alt="GIF" />
             <p>Web Development, Linux, Open Source, and Music Production</p>
         </header>
 
@@ -97,52 +98,48 @@
 
         <script>
             document.addEventListener("DOMContentLoaded", function () {
-                var audio = document.querySelector("audio");
+    var audio = document.querySelector("audio");
 
-                // Function to play audio
-                function playAudio() {
-                    audio.play();
-                }
+    // Function to play audio
+    function playAudio() {
+        audio.play();
+    }
 
-                // Function to hide the entry button and show content
-                function showContent() {
-                    var entryButton = document.getElementById("entryButton");
-                    var content = document.getElementById("content");
+    // Function to hide the entry button and show content
+    function showContent() {
+        var entryButton = document.getElementById("entryButton");
+        var content = document.getElementById("content");
 
-                    entryButton.style.opacity = 0;
-                    entryButton.style.pointerEvents = "none"; // Disable further clicks
-                    setTimeout(function () {
-                        entryButton.style.display = "none";
-                        content.style.display = "block";
-                        playAudio();
-                    }, 500); // Delay for a smooth transition
-                }
+        entryButton.style.opacity = 0;
+        entryButton.style.pointerEvents = "none"; // Disable further clicks
+        setTimeout(function () {
+            entryButton.style.display = "none";
+            content.style.display = "block";
+            playAudio();
+        }, 500); // Delay for a smooth transition
+    }
 
-                // Add event listener to the entry button
-                document
-                    .getElementById("entryButton")
-                    .addEventListener("click", showContent);
+    // Add event listener to the entry button
+    document
+        .getElementById("entryButton")
+        .addEventListener("click", showContent);
 
-                // Mute/unmute button functionality
-                document
-                    .getElementById("muteButton")
-                    .addEventListener("click", function () {
-                        audio.muted = !audio.muted;
+    
+    // Mute/unmute when the GIF is clicked
+    document
+        .getElementById("gif")
+        .addEventListener("click", function () {
+            audio.muted = !audio.muted;
+        });
 
-                        // Update button text
-                        document.getElementById("muteButton").innerText = audio.muted
-                            ? "Unmute"
-                            : "Mute";
-                    });
-
-                // Favicon update on tab visibility change
-                document.addEventListener("visibilitychange", function () {
-                    var favicon = document.getElementById("favicon");
-                    favicon.href = document.hidden
-                        ? "https://i1.sndcdn.com/artworks-000249315727-5hakhw-t500x500.jpg"
-                        : "https://cdn.discordapp.com/attachments/1167493869076754623/1175730719595692122/chrome_hearts.jpeg";
-                });
-            });
+    // Favicon update on tab visibility change
+    document.addEventListener("visibilitychange", function () {
+        var favicon = document.getElementById("favicon");
+        favicon.href = document.hidden
+            ? "https://i1.sndcdn.com/artworks-000249315727-5hakhw-t500x500.jpg"
+            : "https://cdn.discordapp.com/attachments/1167493869076754623/1175730719595692122/chrome_hearts.jpeg";
+    });
+});
         </script>
     </div>
 </body>
