@@ -2,20 +2,22 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Skidee</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="icon" id="favicon" href="https://cdn.discordapp.com/attachments/1167493869076754623/1175730719595692122/chrome_hearts.jpeg" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+    <link rel="icon" id="favicon"
+        href="https://cdn.discordapp.com/attachments/1167493869076754623/1175730719595692122/chrome_hearts.jpeg"
+        type="image/x-icon" />
 
     <style>
         body {
             background-color: black;
             color: white;
             margin: 0;
-            font-family: 'Press Start 2P', sans-serif;
+            font-family: "Press Start 2P", sans-serif;
         }
 
         header {
@@ -40,7 +42,7 @@
             text-decoration: none;
             color: white;
             font-size: 18px;
-            font-family: 'Press Start 2P', sans-serif;
+            font-family: "Press Start 2P", sans-serif;
             transition: color 0.3s ease;
             display: inline-block;
         }
@@ -49,67 +51,100 @@
             color: #1f1ef7;
         }
 
-        #muteButton {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: black;
-            color: white;
-            border: none;
-            padding: 10px;
+        #entryButton {
+            display: flex;
+            font-family: "Press Start 2P", sans-serif;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #000000;
+            color: #ffffff;
             cursor: pointer;
+        }
+
+        #content {
+            display: none;
+        }
+
+        .container {
+            text-align: center;
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <img src="https://media.tenor.com/QGvhb6Jj-g8AAAAC/sonic-lowpoly.gif" alt="GIF">
-        <p>Web Development, Linux, Open Source, and Music Production</p>
-    </header>
+    <div class="container" >
+        <p id="entryButton">Click To Enter</p>
+    </div>
 
-    <nav>
-        <a href="https://github.com/HeySkidee" target="_blank">GitHub</a>
-        <a href="https://x.com/Skidee24" target="_blank">X.com</a>
-        <a href="https://spoti.fi/3NO5Die" target="_blank">Music</a>
-    </nav>
+    <div id="content">
+        <header>
+            <img src="https://media.tenor.com/QGvhb6Jj-g8AAAAC/sonic-lowpoly.gif" alt="GIF" />
+            <p>Web Development, Linux, Open Source, and Music Production</p>
+        </header>
 
-<!--     <audio id="backgroundMusic" autoplay loop>
-        <source src="cancun-sega.mp3" type="audio/mp3">
-        <!-- Provide alternative audio sources for different browsers if needed 
-        Your browser does not support the audio element.
-    </audio>
+        <nav>
+            <a href="https://github.com/HeySkidee" target="_blank">GitHub</a>
+            <a href="https://x.com/Skidee24" target="_blank">X.com</a>
+            <a href="https://spoti.fi/3NO5Die" target="_blank">Music</a>
+        </nav>
 
-    <button id="muteButton">Mute</button> -->
+        <audio controls autoplay loop style="display: none">
+            <source src="skidee-xyz.mp3" type="audio/mp3" />
+            Your browser does not support the audio tag.
+        </audio>
 
-    <script>
-         document.addEventListener('DOMContentLoaded', function () {
-        var audio = document.getElementById('backgroundMusic');
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var audio = document.querySelector("audio");
 
-        // Play audio
-        audio.play();
+                // Function to play audio
+                function playAudio() {
+                    audio.play();
+                }
 
-        // Mute/unmute button functionality
-        document.getElementById('muteButton').addEventListener('click', function () {
-            audio.muted = !audio.muted;
+                // Function to hide the entry button and show content
+                function showContent() {
+                    var entryButton = document.getElementById("entryButton");
+                    var content = document.getElementById("content");
 
-            // Update button text
-            document.getElementById('muteButton').innerText = audio.muted ? 'Unmute' : 'Mute';
-        });
+                    entryButton.style.opacity = 0;
+                    entryButton.style.pointerEvents = "none"; // Disable further clicks
+                    setTimeout(function () {
+                        entryButton.style.display = "none";
+                        content.style.display = "block";
+                        playAudio();
+                    }, 500); // Delay for a smooth transition
+                }
 
-        // Favicon update on tab visibility change
-        document.addEventListener('visibilitychange', function () {
-            if (document.hidden) {
-                // Tab is hidden
-                document.getElementById('favicon').href = 'https://i1.sndcdn.com/artworks-000249315727-5hakhw-t500x500.jpg';
-            } else {
-                // Tab is visible
-                document.getElementById('favicon').href = 'https://cdn.discordapp.com/attachments/1167493869076754623/1175730719595692122/chrome_hearts.jpeg';
-            }
-        });
-    });
-</script>
-    </script>
+                // Add event listener to the entry button
+                document
+                    .getElementById("entryButton")
+                    .addEventListener("click", showContent);
+
+                // Mute/unmute button functionality
+                document
+                    .getElementById("muteButton")
+                    .addEventListener("click", function () {
+                        audio.muted = !audio.muted;
+
+                        // Update button text
+                        document.getElementById("muteButton").innerText = audio.muted
+                            ? "Unmute"
+                            : "Mute";
+                    });
+
+                // Favicon update on tab visibility change
+                document.addEventListener("visibilitychange", function () {
+                    var favicon = document.getElementById("favicon");
+                    favicon.href = document.hidden
+                        ? "https://i1.sndcdn.com/artworks-000249315727-5hakhw-t500x500.jpg"
+                        : "https://cdn.discordapp.com/attachments/1167493869076754623/1175730719595692122/chrome_hearts.jpeg";
+                });
+            });
+        </script>
+    </div>
 </body>
 
 </html>
