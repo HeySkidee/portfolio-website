@@ -18,6 +18,7 @@
             color: white;
             margin: 24px;
             font-family: "Press Start 2P", sans-serif;
+            overflow: hidden;
         }
 
         header {
@@ -107,17 +108,18 @@
 
     // Function to hide the entry button and show content
     function showContent() {
-        var entryButton = document.getElementById("entryButton");
-        var content = document.getElementById("content");
+    var entryButton = document.getElementById("entryButton");
+    var content = document.getElementById("content");
 
-        entryButton.style.opacity = 0;
-        entryButton.style.pointerEvents = "none"; // Disable further clicks
-        setTimeout(function () {
-            entryButton.style.display = "none";
-            content.style.display = "block";
-            playAudio();
-        }, 500); // Delay for a smooth transition
-    }
+    entryButton.style.opacity = 0;
+    entryButton.style.pointerEvents = "none"; // Disable further clicks
+    setTimeout(function () {
+        entryButton.style.display = "none";
+        content.style.display = "block";
+        playAudio();
+        document.body.style.overflow = "auto"; // Show scrollbar
+    }, 500); // Delay for a smooth transition
+}
 
     // Add event listener to the entry button
     document
