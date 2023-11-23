@@ -15,15 +15,43 @@
     <style>
         body {
             background-color: black;
-            color: white;
+            color: rgba(255, 255, 255, 0.8);
             margin: 24px;
             font-family: "Press Start 2P", sans-serif;
             overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: filter 0.5s;
+        }
+
+        @keyframes moving-shadow {
+            0% {
+                text-shadow: 0px 0px 40px rgba(255, 255, 255, 0.5);
+            }
+
+            25% {
+                text-shadow: 5px 0px 10px rgba(255, 255, 255, 0.5);
+            }
+
+            50% {
+                text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+            }
+
+            75% {
+                text-shadow: -5px 0px 10px rgba(255, 255, 255, 0.5);
+            }
+
+            100% {
+                text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+            }
         }
 
         header {
             text-align: center;
             padding: 28px;
+            text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+            animation: moving-shadow 15s infinite;
         }
 
         img {
@@ -42,15 +70,16 @@
         nav a {
             margin: 10px;
             text-decoration: none;
-            color: white;
+            color: rgba(255, 255, 255, 0.8);
             font-size: 18px;
             font-family: "Press Start 2P", sans-serif;
             transition: color 0.3s ease;
             display: inline-block;
+            text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5);
         }
 
         nav a:hover {
-            color: rgb(16, 20, 230)
+            color: rgb(27, 31, 250);
         }
 
         #entryButton {
@@ -64,6 +93,7 @@
             color: #ffffff;
             cursor: pointer;
             font-size: 20px;
+            text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5);
         }
 
         #content {
@@ -77,7 +107,7 @@
 </head>
 
 <body>
-    <div class="container" >
+    <div class="container">
         <p id="entryButton">Click To Enter</p>
     </div>
 
@@ -94,55 +124,59 @@
         </nav>
 
         <audio controls autoplay loop style="display: none">
-            <source src="skidee-xyz.mp3" type="audio/mp3" />
+            <source src="bird-move.mp3" type="audio/mp3" />
             Your browser does not support the audio tag.
         </audio>
 
         <script>
             document.addEventListener("DOMContentLoaded", function () {
-    var audio = document.querySelector("audio");
+                var audio = document.querySelector("audio");
 
-    // Function to play audio
-    function playAudio() {
-        audio.play();
-    }
+                // Function to play audio
+                function playAudio() {
+                    audio.play();
+                }
 
-    // Function to hide the entry button and show content
-    function showContent() {
-    var entryButton = document.getElementById("entryButton");
-    var content = document.getElementById("content");
+                // Function to hide the entry button and show content
+                function showContent() {
+                    var entryButton = document.getElementById("entryButton");
+                    var content = document.getElementById("content");
 
-    entryButton.style.opacity = 0;
-    entryButton.style.pointerEvents = "none"; // Disable further clicks
-    setTimeout(function () {
-        entryButton.style.display = "none";
-        content.style.display = "block";
-        playAudio();
-        document.body.style.overflow = "auto"; // Show scrollbar
-    }, 500); // Delay for a smooth transition
-}
+                    entryButton.style.opacity = 0;
+                    entryButton.style.pointerEvents = "none"; // Disable further clicks
+                    setTimeout(function () {
+                        entryButton.style.display = "none";
+                        content.style.display = "block";
+                        playAudio();
+                        document.body.style.overflow = "auto"; // Show scrollbar
+                    }, 500); // Delay for a smooth transition
+                }
 
-    // Add event listener to the entry button
-    document
-        .getElementById("entryButton")
-        .addEventListener("click", showContent);
+                // Add event listener to the entry button
+                document
+                    .getElementById("entryButton")
+                    .addEventListener("click", showContent);
 
-    
-    // Mute/unmute when the GIF is clicked
-    document
-        .getElementById("gif")
-        .addEventListener("click", function () {
-            audio.muted = !audio.muted;
-        });
+                // Mute/unmute when the GIF is clicked
+                document.getElementById("gif").addEventListener("click", function () {
+                    audio.muted = !audio.muted;
+                });
 
-    // Favicon update on tab visibility change
-    document.addEventListener("visibilitychange", function () {
-        var favicon = document.getElementById("favicon");
-        favicon.href = document.hidden
-            ? "https://i1.sndcdn.com/artworks-000249315727-5hakhw-t500x500.jpg"
-            : "https://cdn.discordapp.com/attachments/1167493869076754623/1175730719595692122/chrome_hearts.jpeg";
-    });
-});
+                // Mute/unmute when the space key is pressed
+                document.body.onkeydown = function (e) {
+                    if (e.keyCode == 32) {
+                        audio.muted = !audio.muted;
+                    }
+                };
+
+                // Favicon update on tab visibility change
+                document.addEventListener("visibilitychange", function () {
+                    var favicon = document.getElementById("favicon");
+                    favicon.href = document.hidden
+                        ? "https://i1.sndcdn.com/artworks-000249315727-5hakhw-t500x500.jpg"
+                        : "https://cdn.discordapp.com/attachments/1167493869076754623/1175730719595692122/chrome_hearts.jpeg";
+                });
+            });
         </script>
     </div>
 </body>
