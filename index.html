@@ -2,55 +2,43 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skidee</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
-    <link rel="icon" id="favicon"
-        href="https://cdn.discordapp.com/attachments/1167493869076754623/1175730719595692122/chrome_hearts.jpeg"
-        type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="icon" id="favicon" href="https://cdn.discordapp.com/attachments/1167493869076754623/1175730719595692122/chrome_hearts.jpeg" type="image/x-icon">
 
     <style>
+        @keyframes moving-shadow {
+            0%, 50%, 100% {
+                text-shadow: 0 0 40px rgba(255,255,255,.5);
+            }
+            25% {
+                text-shadow: 5px 0 10px rgba(255,255,255,.5);
+            }
+            75% {
+                text-shadow: -5px 0 10px rgba(255,255,255,.5);
+            }
+        }
+
         body {
             background-color: black;
             color: rgba(255, 255, 255, 0.8);
             margin: 24px;
-            font-family: "Press Start 2P", sans-serif;
+            font-family: 'Press Start 2P', sans-serif;
             overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: filter 0.5s;
-        }
-
-        @keyframes moving-shadow {
-            0% {
-                text-shadow: 0px 0px 40px rgba(255, 255, 255, 0.5);
-            }
-
-            25% {
-                text-shadow: 5px 0px 10px rgba(255, 255, 255, 0.5);
-            }
-
-            50% {
-                text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
-            }
-
-            75% {
-                text-shadow: -5px 0px 10px rgba(255, 255, 255, 0.5);
-            }
-
-            100% {
-                text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
-            }
+            transition: filter .5s;
         }
 
         header {
             text-align: center;
             padding: 28px;
-            text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
             animation: moving-shadow 15s infinite;
         }
 
@@ -72,10 +60,10 @@
             text-decoration: none;
             color: rgba(255, 255, 255, 0.8);
             font-size: 18px;
-            font-family: "Press Start 2P", sans-serif;
-            transition: color 0.3s ease;
+            font-family: 'Press Start 2P', sans-serif;
+            transition: color .3s ease;
             display: inline-block;
-            text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5);
+            text-shadow: 0 0 20px rgba(255,255,255,.5);
         }
 
         nav a:hover {
@@ -83,17 +71,22 @@
         }
 
         #entryButton {
-            display: flex;
-            font-family: "Press Start 2P", sans-serif;
-            align-items: center;
-            justify-content: center;
-            height: 94vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             margin: 0;
-            background-color: #000000;
-            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 23px;
+            font-family: 'Press Start 2P', sans-serif;
+            text-shadow: 0 0 10px rgba(255,255,255,.5);
+            backdrop-filter: blur(10px);
             cursor: pointer;
-            font-size: 20px;
-            text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5);
         }
 
         #content {
@@ -113,7 +106,7 @@
 
     <div id="content">
         <header>
-            <img id="gif" src="https://media.tenor.com/QGvhb6Jj-g8AAAAC/sonic-lowpoly.gif" alt="GIF" />
+            <img id="gif" src="https://media.tenor.com/QGvhb6Jj-g8AAAAC/sonic-lowpoly.gif" alt="GIF">
             <p>Web Development, Linux, Open Source, and Music Production</p>
         </header>
 
@@ -124,26 +117,28 @@
         </nav>
 
         <audio controls autoplay loop style="display: none">
-            <source src="bird-move.mp3" type="audio/mp3" />
+            <source src="bird-move.mp3" type="audio/mp3">
             Your browser does not support the audio tag.
         </audio>
 
         <script>
             document.addEventListener("DOMContentLoaded", function () {
-                var audio = document.querySelector("audio");
-
+                const audio = document.querySelector("audio");
+                const entryButton = document.getElementById("entryButton");
+                const content = document.getElementById("content");
+                const gif = document.getElementById("gif");
+                const favicon = document.getElementById("favicon");
+        
                 // Function to play audio
                 function playAudio() {
                     audio.play();
                 }
-
+        
                 // Function to hide the entry button and show content
                 function showContent() {
-                    var entryButton = document.getElementById("entryButton");
-                    var content = document.getElementById("content");
-
                     entryButton.style.opacity = 0;
                     entryButton.style.pointerEvents = "none"; // Disable further clicks
+        
                     setTimeout(function () {
                         entryButton.style.display = "none";
                         content.style.display = "block";
@@ -151,34 +146,29 @@
                         document.body.style.overflow = "auto"; // Show scrollbar
                     }, 500); // Delay for a smooth transition
                 }
-
+        
                 // Add event listener to the entry button
-                document
-                    .getElementById("entryButton")
-                    .addEventListener("click", showContent);
-
+                entryButton.addEventListener("click", showContent);
+        
                 // Mute/unmute when the GIF is clicked
-                document.getElementById("gif").addEventListener("click", function () {
+                gif.addEventListener("click", function () {
                     audio.muted = !audio.muted;
                 });
-
+        
                 // Mute/unmute when the space key is pressed
                 document.body.onkeydown = function (e) {
                     if (e.keyCode == 32) {
                         audio.muted = !audio.muted;
                     }
                 };
-
+        
                 // Favicon update on tab visibility change
                 document.addEventListener("visibilitychange", function () {
-                    var favicon = document.getElementById("favicon");
                     favicon.href = document.hidden
                         ? "https://i1.sndcdn.com/artworks-000249315727-5hakhw-t500x500.jpg"
                         : "https://cdn.discordapp.com/attachments/1167493869076754623/1175730719595692122/chrome_hearts.jpeg";
                 });
             });
         </script>
-    </div>
 </body>
-
-</html>
+</html>        
