@@ -33,15 +33,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Mute/unmute when the space key is pressed
     document.body.onkeydown = function (e) {
-        if (e.keyCode == 32) {
+        if (e.key === " ") {
             audio.muted = !audio.muted;
         }
     };
 
-    // Favicon update on tab visibility change
+    // Update favicon when tab visibility changes
     document.addEventListener("visibilitychange", function () {
-        favicon.href = document.hidden
-            ? "https://i1.sndcdn.com/artworks-000249315727-5hakhw-t500x500.jpg"
-            : "https://files.catbox.moe/vdrsp5.jpeg";
+        if (document.hidden) {
+            favicon.href =
+                "https://i1.sndcdn.com/artworks-000249315727-5hakhw-t500x500.jpg";
+        } else {
+            favicon.href = "https://i.imgur.com/whAiE5v.jpeg";
+        }
     });
 });
