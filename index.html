@@ -10,93 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="icon" id="favicon" href="https://cdn.discordapp.com/attachments/1167493869076754623/1175730719595692122/chrome_hearts.jpeg" type="image/x-icon">
 
-    <style>
-        @keyframes moving-shadow {
-            0%, 50%, 100% {
-                text-shadow: 0 0 40px rgba(255,255,255,.5);
-            }
-            25% {
-                text-shadow: 5px 0 10px rgba(255,255,255,.5);
-            }
-            75% {
-                text-shadow: -5px 0 10px rgba(255,255,255,.5);
-            }
-        }
-
-        body {
-            background-color: black;
-            color: rgba(255, 255, 255, 0.8);
-            margin: 24px;
-            font-family: 'Press Start 2P', sans-serif;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: filter .5s;
-        }
-
-        header {
-            text-align: center;
-            padding: 28px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-            animation: moving-shadow 15s infinite;
-        }
-
-        img {
-            width: 100%;
-            max-width: 410px;
-            display: block;
-            margin: 0 auto;
-            cursor: pointer;
-        }
-
-        nav {
-            text-align: center;
-            margin-top: 18px;
-        }
-
-        nav a {
-            margin: 10px;
-            text-decoration: none;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 18px;
-            font-family: 'Press Start 2P', sans-serif;
-            transition: color .3s ease;
-            display: inline-block;
-            text-shadow: 0 0 20px rgba(255,255,255,.5);
-        }
-
-        nav a:hover {
-            color: rgb(27, 31, 250);
-        }
-
-        #entryButton {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 23px;
-            font-family: 'Press Start 2P', sans-serif;
-            text-shadow: 0 0 10px rgba(255,255,255,.5);
-            backdrop-filter: blur(10px);
-            cursor: pointer;
-        }
-
-        #content {
-            display: none;
-        }
-
-        .container {
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -117,58 +31,10 @@
         </nav>
 
         <audio controls loop style="display: none">
-            <source src="bird-move.mp3" type="audio/mp3">
+            <source src="audio/bird-move.mp3" type="audio/mp3">
             Your browser does not support the audio tag.
         </audio>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const audio = document.querySelector("audio");
-                const entryButton = document.getElementById("entryButton");
-                const content = document.getElementById("content");
-                const gif = document.getElementById("gif");
-                const favicon = document.getElementById("favicon");
-        
-                // Function to play audio
-                function playAudio() {
-                    audio.play();
-                }
-        
-                // Function to hide the entry button and show content
-                function showContent() {
-                    entryButton.style.opacity = 0;
-                    entryButton.style.pointerEvents = "none"; // Disable further clicks
-        
-                    setTimeout(function () {
-                        entryButton.style.display = "none";
-                        content.style.display = "block";
-                        playAudio();
-                        document.body.style.overflow = "auto"; // Show scrollbar
-                    }, 500); // Delay for a smooth transition
-                }
-        
-                // Add event listener to the entry button
-                entryButton.addEventListener("click", showContent);
-        
-                // Mute/unmute when the GIF is clicked
-                gif.addEventListener("click", function () {
-                    audio.muted = !audio.muted;
-                });
-        
-                // Mute/unmute when the space key is pressed
-                document.body.onkeydown = function (e) {
-                    if (e.keyCode == 32) {
-                        audio.muted = !audio.muted;
-                    }
-                };
-        
-                // Favicon update on tab visibility change
-                document.addEventListener("visibilitychange", function () {
-                    favicon.href = document.hidden
-                        ? "https://i1.sndcdn.com/artworks-000249315727-5hakhw-t500x500.jpg"
-                        : "https://cdn.discordapp.com/attachments/1167493869076754623/1175730719595692122/chrome_hearts.jpeg";
-                });
-            });
-        </script>
+        <script src="index.js"></script>
     </body>
     </html>
